@@ -13,63 +13,63 @@ from helpers.api_token import generate_api_token
 import variables
 
 
-@pytest.fixture
-def create_account(page):
+# @pytest.fixture
+# def create_account(page):
  
-    if OVERRIDE_ACCOUNT_CREATED == True :
+#     if OVERRIDE_ACCOUNT_CREATED == True :
 
-        variables.subdomain = OVERRIDE_ACCOUNT_SUBDOMAIN
-        variables.base_url = f'https://{variables.subdomain}.{BASE_DOMAIN}'
-        variables.account_email = OVERRIDE_ACCOUNT_EMAIL
-        return
+#         variables.subdomain = OVERRIDE_ACCOUNT_SUBDOMAIN
+#         variables.base_url = f'https://{variables.subdomain}.{BASE_DOMAIN}'
+#         variables.account_email = OVERRIDE_ACCOUNT_EMAIL
+#         return
 
 
-    # Please make sure anything added here is also added to the OVERRIDE section above, if applicable.
-    # Please make sure to test OVERRIDE as well after adding anything here.
-    variables.subdomain = str(uuid.uuid4())
-    variables.base_url = f'https://{variables.subdomain}.{BASE_DOMAIN}'
-    variables.account_email = variables.subdomain + '@' + TEST_EMAIL_DOMAIN
-    variables.admin_name = str(uuid.uuid4())
+#     # Please make sure anything added here is also added to the OVERRIDE section above, if applicable.
+#     # Please make sure to test OVERRIDE as well after adding anything here.
+#     variables.subdomain = str(uuid.uuid4())
+#     variables.base_url = f'https://{variables.subdomain}.{BASE_DOMAIN}'
+#     variables.account_email = variables.subdomain + '@' + TEST_EMAIL_DOMAIN
+#     variables.admin_name = str(uuid.uuid4())
 
-    page.goto(f'https://demo.{BASE_DOMAIN}/syncro_startup/free_trial_rmm_software')
-    variables.business_name = str(uuid.uuid4())
-    variables.admin_name = str(uuid.uuid4())
-    page.fill('#account_admin_full_name', variables.admin_name)
-    page.fill('#account_admin_user_email', variables.account_email)
-    page.fill('#account_name', variables.business_name)
-    page.fill('#account_number_techs', '4')
-    page.select_option('#account_number_endpoints', label='<100')
+#     page.goto(f'https://demo.{BASE_DOMAIN}/syncro_startup/free_trial_rmm_software')
+#     variables.business_name = str(uuid.uuid4())
+#     variables.admin_name = str(uuid.uuid4())
+#     page.fill('#account_admin_full_name', variables.admin_name)
+#     page.fill('#account_admin_user_email', variables.account_email)
+#     page.fill('#account_name', variables.business_name)
+#     page.fill('#account_number_techs', '4')
+#     page.select_option('#account_number_endpoints', label='<100')
 
-    page.fill('#account_admin_password', DEFAULT_PASSWORD)
-    page.fill(
-        '#account_admin_password_confirmation', DEFAULT_PASSWORD)
+#     page.fill('#account_admin_password', DEFAULT_PASSWORD)
+#     page.fill(
+#         '#account_admin_password_confirmation', DEFAULT_PASSWORD)
 
-    page.fill('#account_lead_source', str(uuid.uuid4()))
+#     page.fill('#account_lead_source', str(uuid.uuid4()))
 
-    page.fill('#account_subdomain', variables.subdomain)
+#     page.fill('#account_subdomain', variables.subdomain)
 
-    page.check('#read_tos')
+#     page.check('#read_tos')
 
-    page.click('.submit-signup')
+#     page.click('.submit-signup')
 
-    page.fill('#account_info_street', str(uuid.uuid4()))
-    page.fill('#account_info_city', str(uuid.uuid4()))
-    page.fill('#account_info_state', 'CA')
-    page.fill('#account_info_state', 'CA')
-    page.select_option('#account_info_country', label='United States')
-    page.select_option('#account_info_locale_code', label='USA')
-    page.select_option('#account_info_time_zone',
-                            label='(GMT-08:00) Pacific Time (US & Canada)')
-    page.fill('#account_info_tax_rate', '2.9')
-    page.fill('#account_info_phone', '555-212-1955')
-    page.fill('#account_info_website',
-                    'https://www.'+str(uuid.uuid4()) + '.com')
+#     page.fill('#account_info_street', str(uuid.uuid4()))
+#     page.fill('#account_info_city', str(uuid.uuid4()))
+#     page.fill('#account_info_state', 'CA')
+#     page.fill('#account_info_state', 'CA')
+#     page.select_option('#account_info_country', label='United States')
+#     page.select_option('#account_info_locale_code', label='USA')
+#     page.select_option('#account_info_time_zone',
+#                             label='(GMT-08:00) Pacific Time (US & Canada)')
+#     page.fill('#account_info_tax_rate', '2.9')
+#     page.fill('#account_info_phone', '555-212-1955')
+#     page.fill('#account_info_website',
+#                     'https://www.'+str(uuid.uuid4()) + '.com')
 
-    page.click('.btn-success')
-    page.click('.email-dropdown')
-    variables.token = generate_api_token(page)
-    sleep(5)
-    page.goto(f'https://{variables.subdomain}.{BASE_DOMAIN}/users/sign_out')
+#     page.click('.btn-success')
+#     page.click('.email-dropdown')
+#     variables.token = generate_api_token(page)
+#     sleep(5)
+#     page.goto(f'https://{variables.subdomain}.{BASE_DOMAIN}/users/sign_out')
 
 
 
