@@ -19,15 +19,15 @@ def test_checkout(page):
     # go to list page
 
     # add to cart
-    for i in range(8):
+    for i in range(100):
         page.click('a[class="site-nav--link"]:has-text("Lighting")')
         try:
-            page.click(f"#cat-product-next-maya-thing >> nth={i}", timeout=5000)
+            page.click(f"#cat-product-next-maya-thing--link >> nth={i}", timeout=5000)
         except:
             break
-        item = '.small--one-half:nth-child(6)'
-        page.wait_for_selector(item + ' a p')
-        item_name = page.query_selector(item + ' a p').inner_text()
+        item = '.small--one-half:nth-child(1)'
+        page.wait_for_selector(item + ' .product-title')
+        item_name = page.query_selector(item + ' .product-title').inner_text()
         item_price = page.query_selector(item + ' .product-item--price .visually-hidden >> nth=1').inner_text()
         page.click(item)
         page.wait_for_selector('.product-title-container')

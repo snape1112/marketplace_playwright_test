@@ -21,7 +21,7 @@ def test_checkout(page):
     # add to cart
     for i in range(8):
         page.click('a[class="site-nav--link"]:has-text("Lighting")')
-        page.click(f".cat-product-container:nth-child({i * 2 + 3}) .product-grid-item:first-child")
+        page.click(f".cat-product-container:nth-child({i * 2 + 3}) .grid-item:first-child")
         page.click('#addToCart-product-template')
 
     # go to checkout
