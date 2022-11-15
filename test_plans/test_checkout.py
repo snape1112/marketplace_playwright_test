@@ -21,8 +21,9 @@ def test_checkout(page):
     # add to cart
     for i in range(8):
         page.click('a[class="site-nav--link"]:has-text("Lighting")')
-        page.click(f".cat-product-container:nth-child({i * 2 + 3}) .grid-item:first-child")
-        page.click('#addToCart-product-template')
+        page.click(f".eled-product-container .grid-item:first-child >> nth = {i}")
+        # page.click('#addToCart-product-template')
+        page.click('text="Add to Cart"')
 
     # go to checkout
     page.click('#checkoutButton')
@@ -39,15 +40,15 @@ def test_checkout(page):
     page.fill('#checkout_email', 'hello@email.com')
     page.fill('#checkout_shipping_address_first_name', 'A')
     page.fill('#checkout_shipping_address_last_name', 'B')
-    page.fill('#checkout_shipping_address_address1', '1250 Ocean pkwy')
-    page.fill('#checkout_shipping_address_address2', 'Apt. 20')
-    page.fill('#checkout_shipping_address_city', 'Brooklyn')
-    page.select_option('#checkout_shipping_address_province', label='New York')
-    page.fill('#checkout_shipping_address_zip', '11235')
+    page.fill('#checkout_shipping_address_address1', '119 Forrest Hills Drive')
+    # page.fill('#checkout_shipping_address_address2', 'Apt. 20')
+    page.fill('#checkout_shipping_address_city', 'Grand Rapids')
+    page.select_option('select#checkout_shipping_address_province', label='Michigan')
+    page.fill('#checkout_shipping_address_zip', '49501')
     page.click('text="Continue to shipping"')
 
     # select shipping method
-    page.click('#checkout_shipping_rate_id_shopify-economy-0_00')
+    # page.click('#checkout_shipping_rate_id_shopify-economy-0_00')
     page.click('text="Continue to payment"')
 
     # input credit card
@@ -68,8 +69,8 @@ def test_checkout(page):
     page.wait_for_selector(".os-order-number")
     expect(page.locator('.os-order-number')).to_contain_text('Order #')
     expect(page.locator('#main-header')).to_have_text('Thank you A!')
-    expect(page.locator('.section__content__column--half:first-child .address')).to_contain_text('Brooklyn')
-    expect(page.locator('.section__content__column--half:nth-child(2) .address')).to_contain_text('Brooklyn')
+    expect(page.locator('.section__content__column--half:first-child .address')).to_contain_text('Grand Rapids')
+    expect(page.locator('.section__content__column--half:nth-child(2) .address')).to_contain_text('Grand Rapids')
     page.click('text="Continue shopping"')
 
     expect(page).to_have_url(site_url)
